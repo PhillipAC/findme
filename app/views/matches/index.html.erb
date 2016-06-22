@@ -2,35 +2,11 @@
 
 <h1>Listing Matches</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Finder</th>
-      <th>Target</th>
-      <th>Target x</th>
-      <th>Target y</th>
-      <th>Target z</th>
-      <th>Code</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
+<ul>
     <% @matches.each do |match| %>
-      <tr>
-        <td><%= match.finder_id %></td>
-        <td><%= match.target_id %></td>
-        <td><%= match.target_x %></td>
-        <td><%= match.target_y %></td>
-        <td><%= match.target_z %></td>
-        <td><%= match.code %></td>
-        <td><%= link_to 'Show', match %></td>
-        <td><%= link_to 'Edit', edit_match_path(match) %></td>
-        <td><%= link_to 'Destroy', match, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+        <li><%= link_to User.find(match.target_id).email, match %></li>
     <% end %>
-  </tbody>
-</table>
+</ul>
 
 <br>
 

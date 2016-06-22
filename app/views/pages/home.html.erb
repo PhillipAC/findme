@@ -2,6 +2,8 @@
     <h1>Hot or Cold Friend Finder</h1>
     <p>This is an early alpha version of this meant for testing.</p>
     <% if user_signed_in? %>
-        <%= link_to "Log Out Here!", destroy_user_session_path, :method => :delete %>
+        <%= link_to "Create Target", new_match_path, class: "btn btn-lg btn-primary" %>
+    <% else %>
+        <%= link_to "Create Account", new_user_registration_path, class: "btn btn-lg btn-primary" %>
     <% end %>
 </div>
