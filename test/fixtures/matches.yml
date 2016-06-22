@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  finder_id: 1
+  target_id: 1
+  target_x: 1
+  target_y: 1
+  target_z: 1
+  code: MyString
+
+two:
+  finder_id: 1
+  target_id: 1
+  target_x: 1
+  target_y: 1
+  target_z: 1
+  code: MyString

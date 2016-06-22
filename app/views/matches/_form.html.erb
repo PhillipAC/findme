@@ -1,0 +1,51 @@
+<%= form_for(@match) do |f| %>
+  <%= f.select :finder_id, User.all.collect {|p| [ p.email, p.id ] }, {prompt: 'Select Person'}%>
+  <%= f.hidden_field :target_x, :id => "match_target_x"%>
+  <%= f.hidden_field :target_y, :id => "match_target_y"%>
+  <%= f.hidden_field :target_z, :id => "match_target_z"%>
+  <% if @match.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@match.errors.count, "error") %> prohibited this match from being saved:</h2>
+
+      <ul>
+      <% @match.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+if (navigator.geolocation) {
+  var timeoutVal = 10 * 1000 * 1000;
+  navigator.geolocation.getCurrentPosition(
+    updateField, 
+    displayError,
+    { enableHighAccuracy: true, timeout: timeoutVal, maximumAge: 0 }
+  );
+} 
+else {
+  alert("Geolocation is not supported by this browser");
+}
+
+function updateField(position) {
+  $(document).ready(function(){
+        $("#match_target_x").val(position.coords.latitude);
+        $("#match_target_y").val(position.coords.longitude);
+        $("#match_target_z").val(position.coords.altitude);
+   });
+}
+
+function displayError(error) {
+ var errors = { 
+   1: 'Permission denied',
+   2: 'Position unavailable',
+   3: 'Request timeout'
+ };
+ alert("Error: " + errors[error.code]);
+}
+</script>

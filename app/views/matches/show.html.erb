@@ -1,0 +1,65 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Finder:</strong>
+  <%= User.find(@match.finder_id).email %>
+</p>
+
+<p>
+  <strong>Target:</strong>
+  <%= User.find(@match.target_id).email %>
+</p>
+
+<p>
+  <strong>Target x:</strong>
+  <%= @match.target_x %>
+</p>
+
+<p>
+  <strong>Target y:</strong>
+  <%= @match.target_y %>
+</p>
+<script>
+function request_distance(){
+  alert("testing...");
+  if (navigator.geolocation) {
+    var timeoutVal = 10 * 1000 * 1000;
+    navigator.geolocation.getCurrentPosition(
+      find_distance, 
+      displayError,
+      { enableHighAccuracy: true, timeout: timeoutVal, maximumAge: 0 }
+    );
+  } 
+  else {
+    alert("Geolocation is not supported by this browser");
+  }
+}
+
+function displayError(error) {
+ var errors = { 
+   1: 'Permission denied',
+   2: 'Position unavailable',
+   3: 'Request timeout'
+ };
+ alert("Error: " + errors[error.code]);
+}
+
+function find_distance(){
+  $.ajax({
+          url : "<%= get_distance_match_path %>",
+          type : "post",
+          data : { x_coord: 3, y_coord: 4},
+          success : function(data){
+            alert(data.distance);
+          },
+          error : function(){
+            alert("I am error");
+          }
+  });
+};
+
+setInterval(request_distance(), 3000);
+</script>
+
+<%= link_to 'Edit', edit_match_path(@match) %> |
+<%= link_to 'Back', matches_path %>
