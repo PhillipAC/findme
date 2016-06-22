@@ -6,8 +6,8 @@ Rails.application.routes.draw do
   get 'match/all' => 'matches#index_all'
   get 'match/mine' => 'matches#index_mine'
   
-  get 'pages/about'
-  get 'pages/contact'
+  get 'about' => 'pages#about'
+  get 'contact' => 'pages#contact'
 
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.

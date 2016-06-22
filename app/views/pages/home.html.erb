@@ -1,6 +1,7 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
-<% if user_signed_in? %>
-    <br>
-    <%= link_to "Log Out Here!", destroy_user_session_path, :method => :delete %>
-<% end %>
+<div class="center jumbotron">
+    <h1>Hot or Cold Friend Finder</h1>
+    <p>This is an early alpha version of this meant for testing.</p>
+    <% if user_signed_in? %>
+        <%= link_to "Log Out Here!", destroy_user_session_path, :method => :delete %>
+    <% end %>
+</div>
