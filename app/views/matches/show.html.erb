@@ -9,19 +9,10 @@
   <strong>Target:</strong>
   <%= User.find(@match.target_id).email %>
 </p>
-
-<p>
-  <strong>Target x:</strong>
-  <%= @match.target_x %>
-</p>
-
-<p>
-  <strong>Target y:</strong>
-  <%= @match.target_y %>
-</p>
+<div id="radar"></div>
 <script>
+var level = "To be updated"
 function request_distance(){
-  alert("testing...");
   if (navigator.geolocation) {
     var timeoutVal = 10 * 1000 * 1000;
     navigator.geolocation.getCurrentPosition(
@@ -44,21 +35,27 @@ function displayError(error) {
  alert("Error: " + errors[error.code]);
 }
 
-function find_distance(){
+function find_distance(position){
   $.ajax({
           url : "<%= get_distance_match_path %>",
           type : "post",
-          data : { x_coord: 3, y_coord: 4},
+          data : { 
+              x_coord: position.coords.latitude, 
+              y_coord: position.coords.longitude},
           success : function(data){
-            alert(data.distance);
+            if (data.level !== null )
+            {
+              level = data.level
+            }
+            $("#radar").text(data.distance + ":" + level);
           },
           error : function(){
-            alert("I am error");
+            $("#radar").text("Could not connect to server")
           }
   });
 };
 
-setInterval(request_distance(), 3000);
+setInterval(function(){request_distance()}, 3000);
 </script>
 
 <%= link_to 'Edit', edit_match_path(@match) %> |

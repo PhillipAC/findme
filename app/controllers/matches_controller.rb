@@ -52,7 +52,21 @@ class MatchesController < ApplicationController
     y_1 = params[:y_coord]
     @match = Match.find(params[:id])
     distance = (x_1.to_f - @match.target_x)**2+(y_1.to_f - @match.target_y)**2
-    render :json => { :distance => distance }
+    if @match.distance
+      if @match.distance < distance
+        level = "colder"
+      end
+      if @match.distance > distance
+        level = "hotter"
+      end
+      if distance < 3e-9
+        level = "ON FIRE!"
+      end
+    else
+      level = "move"
+    end
+    @match.update(distance: distance)
+    render :json => { :distance => distance, :level => level }
   end
 
   # PATCH/PUT /matches/1

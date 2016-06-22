@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20160620002814) do
     t.float    "target_x"
     t.float    "target_y"
     t.float    "target_z"
+    t.float    "distance"
     t.string   "code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -6,6 +6,7 @@ class CreateMatches < ActiveRecord::Migration
       t.float :target_x
       t.float :target_y
       t.float :target_z
+      t.float :distance
       t.string :code
 
       t.timestamps null: false
