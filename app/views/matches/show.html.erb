@@ -22,7 +22,7 @@ function request_distance(){
     );
   } 
   else {
-    alert("Geolocation is not supported by this browser");
+    $("#radar").text("Geolocation is not supported by this browser");
   }
 }
 
@@ -32,7 +32,7 @@ function displayError(error) {
    2: 'Position unavailable',
    3: 'Request timeout'
  };
- alert("Error: " + errors[error.code]);
+ $("#radar").text("Error: " + errors[error.code]);
 }
 
 function find_distance(position){
