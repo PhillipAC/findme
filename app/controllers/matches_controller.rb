@@ -1,6 +1,7 @@
 class MatchesController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :new, :edit, :update, :destroy]
+  before_action :authenticate_user!
   before_action :set_match, only: [:show, :edit, :update, :destroy]
+  before_action :user_is_finder, only: [:show]
 
   # GET /matches
   # GET /matches.json
@@ -13,6 +14,7 @@ class MatchesController < ApplicationController
   end
   
   def index_all
+    redirect_to(root_url)
     @matches = Match.all
   end
 
@@ -93,6 +95,8 @@ class MatchesController < ApplicationController
     end
   end
 
+#-------------------------------
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_match
@@ -102,5 +106,10 @@ class MatchesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def match_params
       params.require(:match).permit(:target_x, :target_y, :target_z, :finder_id)
+    end
+    
+    def user_is_finder
+      @match = Match.find(params[:id])
+      redirect_to(root_url) unless current_user.id = match.finder_id
     end
 end
