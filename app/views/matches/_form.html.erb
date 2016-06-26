@@ -4,8 +4,11 @@
   <%= f.select :finder_id, User.all.collect {|p| [ p.email, p.id ] }, {prompt: 'Select Person'}%>
   <br><br><%= f.label :name %>
   <%= f.text_field :name %>
-  <%= f.hidden_field :target_x, :id => "match_target_x"%>
-  <%= f.hidden_field :target_y, :id => "match_target_y"%>
+  <br>
+  <strong>X-Coordinate:</strong>
+  <%= f.number_field :target_x, :id => "match_target_x"%><br>
+  <strong>Y-Coordinate:</strong>
+  <%= f.number_field :target_y, :id => "match_target_y"%><br>
   <%= f.hidden_field :target_z, :id => "match_target_z"%>
   <% if @match.errors.any? %>
     <div id="error_explanation">
@@ -22,18 +25,24 @@
     <%= f.submit %>
   </div>
 <% end %>
+<button class="btn btn-sm btn-primary" id="auto">Use your location</button>
 
 <script type="text/javascript">
-if (navigator.geolocation) {
-  var timeoutVal = 10 * 1000 * 1000;
-  navigator.geolocation.getCurrentPosition(
-    updateField, 
-    displayError,
-    { enableHighAccuracy: true, timeout: timeoutVal, maximumAge: 0 }
-  );
-} 
-else {
-  $("#warning").text = "Your device does not support GPS";
+$("#auto").click(function(){
+  getLocation();
+})
+getLocation = function(){
+  if (navigator.geolocation) {
+    var timeoutVal = 10 * 1000 * 1000;
+    navigator.geolocation.getCurrentPosition(
+      updateField, 
+      displayError,
+      { enableHighAccuracy: true, timeout: timeoutVal, maximumAge: 0 }
+    );
+  } 
+  else {
+    $("#warning").text = "Your device does not support GPS";
+  }
 }
 
 function updateField(position) {
