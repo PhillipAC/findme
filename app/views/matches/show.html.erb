@@ -1,12 +1,16 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <strong>Name:</strong> 
+  <%= @match.name %>
+</p>
+<p>
   <strong>Finder:</strong>
   <%= User.find(@match.finder_id).email %>
 </p>
 
 <p>
-  <strong>Target:</strong>
+  <strong>Creator:</strong>
   <%= User.find(@match.target_id).email %>
 </p>
 <div id="radar"></div>

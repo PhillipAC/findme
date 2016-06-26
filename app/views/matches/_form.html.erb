@@ -1,5 +1,9 @@
+<div id="warning"></div>
 <%= form_for(@match) do |f| %>
+  <strong>Finder:</strong> 
   <%= f.select :finder_id, User.all.collect {|p| [ p.email, p.id ] }, {prompt: 'Select Person'}%>
+  <br><br><%= f.label :name %>
+  <%= f.text_field :name %>
   <%= f.hidden_field :target_x, :id => "match_target_x"%>
   <%= f.hidden_field :target_y, :id => "match_target_y"%>
   <%= f.hidden_field :target_z, :id => "match_target_z"%>
@@ -29,7 +33,7 @@ if (navigator.geolocation) {
   );
 } 
 else {
-  alert("Geolocation is not supported by this browser");
+  $("#warning").text = "Your device does not support GPS";
 }
 
 function updateField(position) {
@@ -46,6 +50,6 @@ function displayError(error) {
    2: 'Position unavailable',
    3: 'Request timeout'
  };
- alert("Error: " + errors[error.code]);
+ $("#warning").text = "Your device has the following errors: " + errors[error.code];
 }
 </script>

@@ -4,7 +4,9 @@
 
 <ul>
     <% @matches.each do |match| %>
-        <li><%= link_to User.find(match.target_id).email, match %></li>
+        <li><%= link_to match.name, match%> | 
+        <%= link_to User.find(match.target_id).email, match %> |
+        <%= link_to match.created_at, match %></li>
     <% end %>
 </ul>
 

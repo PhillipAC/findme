@@ -105,7 +105,7 @@ class MatchesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def match_params
-      params.require(:match).permit(:target_x, :target_y, :target_z, :finder_id)
+      params.require(:match).permit(:target_x, :target_y, :target_z, :finder_id, :name)
     end
     
     def user_is_finder
