@@ -61,7 +61,7 @@ class MatchesController < ApplicationController
       if @match.distance > distance
         level = "hotter"
       end
-      if distance < 3e-9
+      if distance < 3e-8
         level = "ON FIRE!"
       end
     else

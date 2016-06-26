@@ -13,8 +13,11 @@
   <strong>Creator:</strong>
   <%= User.find(@match.target_id).email %>
 </p>
-<div id="radar"></div>
+<button class="btn btn-lg btn-primary" id="hoc">Hotter or Colder?</button>
+<strong><div id="radar"></div></strong>
 <script>
+
+$("#hoc").click(function(){request_distance()});
 var level = "To be updated"
 function request_distance(){
   if (navigator.geolocation) {
@@ -51,7 +54,7 @@ function find_distance(position){
             {
               level = data.level
             }
-            $("#radar").text(data.distance + ":" + level);
+            $("#radar").html("<span style='color:red'>" + level + "</span> :" + data.distance);
           },
           error : function(){
             $("#radar").text("Could not connect to server")
@@ -59,7 +62,7 @@ function find_distance(position){
   });
 };
 
-setInterval(function(){request_distance()}, 3000);
+//setInterval(function(){request_distance()}, 3000);
 </script>
 
 <%= link_to 'Edit', edit_match_path(@match) %> |
