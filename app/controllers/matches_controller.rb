@@ -6,7 +6,8 @@ class MatchesController < ApplicationController
   # GET /matches
   # GET /matches.json
   def index
-    @matches = Match.select { |match| match.finder_id == current_user.id }
+    @finder_matches = Match.select { |match| match.finder_id == current_user.id }
+    @target_matches = Match.select { |match| match.target_id == current_user.id }
   end
   
   def index_mine
