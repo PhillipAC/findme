@@ -6,9 +6,9 @@
   <%= f.text_field :name %>
   <br>
   <strong>X-Coordinate:</strong>
-  <%= f.number_field :target_x, :id => "match_target_x"%><br>
+  <%= f.number_field :target_x, :id => "match_target_x", :step => 'any'%><br>
   <strong>Y-Coordinate:</strong>
-  <%= f.number_field :target_y, :id => "match_target_y"%><br>
+  <%= f.number_field :target_y, :id => "match_target_y", :step => 'any'%><br>
   <%= f.hidden_field :target_z, :id => "match_target_z"%>
   <% if @match.errors.any? %>
     <div id="error_explanation">
@@ -25,6 +25,7 @@
     <%= f.submit %>
   </div>
 <% end %>
+<br>
 <button class="btn btn-sm btn-primary" id="auto">Use your location</button>
 
 <script type="text/javascript">
