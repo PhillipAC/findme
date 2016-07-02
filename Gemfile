@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
-gem 'bootstrap-sass',       '3.2.0.0'
+gem 'bootstrap-sass',       '3.3.6'
 # Use pg as the database for Active Record
 group :development, :test do
   gem 'sqlite3',     '1.3.9'
@@ -32,4 +32,4 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use devise for users and authentication
-gem 'devise'
+gem 'devise', '4.1.1'
