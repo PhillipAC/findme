@@ -111,6 +111,6 @@ class MatchesController < ApplicationController
     
     def user_is_finder
       @match = Match.find(params[:id])
-      redirect_to(root_url) unless current_user.id = @match.finder_id
+      redirect_to(root_url) unless current_user.id == @match.finder_id || current_user == @match.target
     end
 end

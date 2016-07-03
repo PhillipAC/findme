@@ -6,19 +6,19 @@
 </p>
 <p>
   <strong>Finder:</strong>
-  <%= User.find(@match.finder_id).email %>
+  <%= @match.finder.email %>
 </p>
 
 <p>
   <strong>Creator:</strong>
-  <%= User.find(@match.target_id).email %>
+  <%= @match.target.email %>
 </p>
-<% if current_user.id == @match.finder_id %>
+<% if current_user == @match.finder %>
   <button class="btn btn-lg btn-primary" id="hoc">Hotter or Colder?</button>
   <strong><div id="radar"></div></strong>
   <br>
 <% end %>
-<% if current_user.id == @match.target_id %>
+<% if current_user == @match.target %>
   <iframe src=
     <%="http://maps.google.com/maps?q=" + @match.target_x.to_s + 
     "," + @match.target_y.to_s + "&z=15&output=embed"%> >
