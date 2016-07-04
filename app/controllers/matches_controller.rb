@@ -51,7 +51,7 @@ class MatchesController < ApplicationController
     y_1 = params[:y_coord]
     @match = Match.find(params[:id])
     distance = (x_1.to_f - @match.target_x)**2+(y_1.to_f - @match.target_y)**2
-    unless @match.startDistance
+    if @match.startDistance == nil
       @match.update(startDistance: distance)
     end
     if @match.distance
