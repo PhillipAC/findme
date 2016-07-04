@@ -67,7 +67,8 @@ class MatchesController < ApplicationController
     @match.update(distance: distance)
     initial = @match.startDistance 
     percentage = (100*(initial - distance)/(initial)).round
-    render :json => { :distance => distance, 
+    render :json => { :initial => initial,
+                      :distance => distance, 
                       :level => level, 
                       :percentage => percentage }
   end

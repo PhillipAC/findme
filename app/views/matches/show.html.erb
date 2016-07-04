@@ -70,7 +70,7 @@ function find_distance(position){
             {
               level = data.level
             }
-            $("#radar").html("<span style='color:red'>" + level + "</span> :" + data.percentage);
+            $("#radar").html("<span style='color:red'>" + level + "</span> :" + data.distance + " " + data.initial);
             $('.progress-bar').css('width', data.percentage+'%').attr('aria-valuenow', data.percentage).text(data.percentage+'%');
             
           },
