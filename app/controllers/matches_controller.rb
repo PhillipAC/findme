@@ -10,10 +10,6 @@ class MatchesController < ApplicationController
     @target_matches = Match.select { |match| match.target_id == current_user.id }
   end
   
-  def index_mine
-    @matches = Match.select { |match| match.targetet_id == current_user.id }
-  end
-  
   def index_all
     redirect_to(root_url)
     @matches = Match.all
@@ -55,21 +51,25 @@ class MatchesController < ApplicationController
     y_1 = params[:y_coord]
     @match = Match.find(params[:id])
     distance = (x_1.to_f - @match.target_x)**2+(y_1.to_f - @match.target_y)**2
+    unless @match.startDistance
+      @match.update(startDistance: distance)
+    end
     if @match.distance
-      if @match.distance < distance
+      if @match.distance <= distance
         level = "colder"
       end
       if @match.distance > distance
         level = "hotter"
       end
-      if distance < 3e-8
-        level = "ON FIRE!"
-      end
     else
       level = "move"
     end
     @match.update(distance: distance)
-    render :json => { :distance => distance, :level => level }
+    initial = @match.startDistance 
+    percentage = (100*(initial - distance)/(initial)).round
+    render :json => { :distance => distance, 
+                      :level => level, 
+                      :percentage => percentage }
   end
 
   # PATCH/PUT /matches/1

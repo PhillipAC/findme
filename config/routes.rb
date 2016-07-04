@@ -4,7 +4,6 @@ Rails.application.routes.draw do
       post 'get_distance', on: :member
   end
   get 'match/all' => 'matches#index_all'
-  get 'match/mine' => 'matches#index_mine'
   
   get 'about' => 'pages#about'
   get 'contact' => 'pages#contact'
