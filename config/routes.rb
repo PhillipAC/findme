@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :profiles
   resources :matches do
       post 'get_distance', on: :member
   end
