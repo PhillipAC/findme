@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   
   get 'about' => 'pages#about'
   get 'contact' => 'pages#contact'
+  get 'faq' => 'pages#faq'
 
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
