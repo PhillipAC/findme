@@ -1,0 +1,16 @@
+<h1>Edit Profile</h1>
+
+<%= form_for(@user, url: update_profile_users_path) do |f| %>
+  <%= f.label :location %> 
+  <%= f.text_field :location%>
+  <br><%= f.label :birthday %>
+  <%= f.date_field :birthday %>
+  <br><%= f.label :about %>
+  <%= f.text_area :about %>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<%= link_to 'Show', @user %> |
+<%= link_to 'Back', user_path(id: @user.id) %>

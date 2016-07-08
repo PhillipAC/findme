@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160704172657) do
+ActiveRecord::Schema.define(version: 20160707220848) do
 
   create_table "friendships", force: :cascade do |t|
     t.integer  "friendable_id"
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20160704172657) do
     t.integer  "status"
   end
 
-  create_table "matches", force: :cascade do |t|
+  create_table "locations", force: :cascade do |t|
     t.integer  "finder_id"
     t.integer  "target_id"
     t.float    "target_x"
@@ -38,8 +38,16 @@ ActiveRecord::Schema.define(version: 20160704172657) do
     t.integer  "state"
   end
 
-  add_index "matches", ["finder_id"], name: "index_matches_on_finder_id"
-  add_index "matches", ["target_id"], name: "index_matches_on_target_id"
+  add_index "locations", ["finder_id"], name: "index_locations_on_finder_id"
+  add_index "locations", ["target_id"], name: "index_locations_on_target_id"
+
+  create_table "profiles", force: :cascade do |t|
+    t.string   "location"
+    t.date     "birth_day"
+    t.text     "about"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -56,6 +64,9 @@ ActiveRecord::Schema.define(version: 20160704172657) do
     t.datetime "updated_at",                          null: false
     t.string   "first_name"
     t.string   "last_name"
+    t.string   "location"
+    t.text     "about"
+    t.date     "birthday"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

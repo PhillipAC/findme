@@ -1,0 +1,12 @@
+<%= @user.full_name %>'s Profile.
+<p id="info">
+Location: <%= @user.location %><br>
+Birthday: <%= @user.birthday %>
+</p>
+<p id="about">
+    About:<br>
+    <%= @user.about %>
+</p>
+<% if @user == current_user %>
+    <%= link_to "Edit Profile", edit_profile_users_path %>
+<% end %>

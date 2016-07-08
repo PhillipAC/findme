@@ -44,7 +44,7 @@ function find_distance(position){
   
 	$.ajax({
           
-		url : "<%= get_distance_match_path %>",
+		url : "<%= get_distance_location_path %>",
           
 		type : "post",
           
@@ -86,11 +86,11 @@ function updateField(position) {
   
 	$(document).ready(function(){
         
-		$("#match_target_x").val(position.coords.latitude);
+		$("#location_target_x").val(position.coords.latitude);
         
-		$("#match_target_y").val(position.coords.longitude);
+		$("#location_target_y").val(position.coords.longitude);
         
-		$("#match_target_z").val(position.coords.altitude);
+		$("#location_target_z").val(position.coords.altitude);
    
 	});
 }

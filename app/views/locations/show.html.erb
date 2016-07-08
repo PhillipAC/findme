@@ -1,0 +1,87 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong> 
+  <%= @location.name %>
+</p>
+<p>
+  <strong>Finder:</strong>
+  <%= @location.finder.email %>
+</p>
+
+<p>
+  <strong>Creator:</strong>
+  <%= @location.target.email %>
+</p>
+<% if current_user == @location.finder %>
+  <button class="btn btn-lg btn-primary" id="hoc">Hotter or Colder?</button>
+  <strong><div id="radar"></div></strong>
+  <div class="progress">
+    <div class="progress-bar" role="progressbar" aria-valuenow="0"
+    aria-valuemin="0" aria-valuemax="100" style="width:0%">
+      Press Hot Or Cold
+    </div>
+  </div>
+  <br>
+<% end %>
+<% if current_user == @location.target %>
+  <iframe src=
+    <%="https://maps.google.com/maps?q=" + @location.target_x.to_s + 
+    "," + @location.target_y.to_s + "&z=15&output=embed"%> >
+  </iframe>
+  <br>
+<% end %>
+<script>
+
+$("#hoc").click(function(){request_distance()});
+var level = "To be updated"
+function request_distance(){
+  if (navigator.geolocation) {
+    var timeoutVal = 10 * 1000 * 1000;
+    navigator.geolocation.getCurrentPosition(
+      find_distance, 
+      displayError,
+      { enableHighAccuracy: true, timeout: timeoutVal, maximumAge: 0 }
+    );
+  } 
+  else {
+    $("#radar").text("Geolocation is not supported by this browser");
+  }
+}
+
+function displayError(error) {
+ var errors = { 
+   1: 'Permission denied',
+   2: 'Position unavailable',
+   3: 'Request timeout'
+ };
+ $("#radar").text("Error: " + errors[error.code]);
+}
+
+function find_distance(position){
+  $.ajax({
+          url : "<%= get_distance_location_path %>",
+          type : "post",
+          data : { 
+              x_coord: position.coords.latitude, 
+              y_coord: position.coords.longitude},
+          success : function(data){
+            if (data.level !== null )
+            {
+              level = data.level
+            }
+            $("#radar").html("<span style='color:red'>" + level + "</span> :" + data.distance + " " + data.initial);
+            $('.progress-bar').css('width', data.percentage+'%').attr('aria-valuenow', data.percentage).text(data.percentage+'%');
+            
+          },
+          error : function(){
+            $("#radar").text("Could not connect to server")
+          }
+  });
+};
+
+//setInterval(function(){request_distance()}, 3000);
+</script>
+
+<%= link_to 'Edit', edit_location_path(@location) %> |
+<%= link_to 'Back', locations_path %>

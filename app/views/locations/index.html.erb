@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Locations</h1>
+<h2>Locations to Find</h2>
+<ul>
+    <% @finder_locations.each do |location| %>
+        <li><%= link_to location.name, location%> | 
+        <%= link_to User.find(location.target_id).email, location %> |
+        <%= link_to location.created_at, location %></li>
+    <% end %>
+</ul>
+<h2>Your Locations</h2>
+<ul>
+    <% @target_locations.each do |location| %>
+        <li><%= link_to location.name, location%> | 
+        <%= link_to User.find(location.target_id).email, location %> |
+        <%= link_to location.created_at, location %></li>
+    <% end %>
+</ul>
+<br>
+<%= link_to 'New Location', new_location_path %>
